@@ -79,4 +79,18 @@ public class FilesStorageServiceImpl implements FilesStorageService {
             throw new RuntimeException("Could not load the files!");
         }
     }
+
+    @Override
+    public String saveAndGetUrl(MultipartFile file) {
+        try {
+            String filename = file.getOriginalFilename();
+            Path filePath = this.root.resolve(filename);
+
+            Files.copy(file.getInputStream(), filePath);
+
+            return filePath.toUri().toString();
+        } catch (Exception e) {
+            throw new RuntimeException("Could not save file: " + e.getMessage());
+        }
+    }
 }

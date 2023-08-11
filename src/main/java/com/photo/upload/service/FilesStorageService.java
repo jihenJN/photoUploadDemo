@@ -10,6 +10,8 @@ public interface FilesStorageService {
 
     public void save(MultipartFile file);
 
+    public String saveAndGetUrl(MultipartFile file);
+
     public Resource load(String filename);
 
     public boolean delete(String filename);
