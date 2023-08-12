@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UploadFileService } from 'app/entities/plate/service/upload-file.service';
@@ -9,6 +9,7 @@ import { UploadFileService } from 'app/entities/plate/service/upload-file.servic
   styleUrls: ['./upload-images.component.scss'],
 })
 export class UploadImagesComponent implements OnInit {
+  @Output() imageUploaded: EventEmitter<string> = new EventEmitter<string>();
   selectedFiles: FileList | null = null;
   currentFile: File | undefined = undefined;
   progress = 0;
@@ -38,6 +39,9 @@ export class UploadImagesComponent implements OnInit {
           } else if (event instanceof HttpResponse) {
             this.message = event.body?.message || 'Upload successful';
             this.fileInfos = this.uploadService.getFiles();
+
+            // Emit the image URL to the parent component
+            this.imageUploaded.emit(event.body?.fileDownloadUri);
           }
         },
         err => {

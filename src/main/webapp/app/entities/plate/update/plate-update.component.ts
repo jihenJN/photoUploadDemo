@@ -70,4 +70,9 @@ export class PlateUpdateComponent implements OnInit {
     this.plate = plate;
     this.plateFormService.resetForm(this.editForm, plate);
   }
+
+  protected onImageUploaded(url: string): void {
+    // Set the image URL in the 'photo' form control
+    this.editForm.get('photo')?.setValue('hello its me');
+  }
 }
