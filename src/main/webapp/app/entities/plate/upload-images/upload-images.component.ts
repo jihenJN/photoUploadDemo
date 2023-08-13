@@ -41,7 +41,7 @@ export class UploadImagesComponent implements OnInit {
             this.fileInfos = this.uploadService.getFiles();
 
             // Emit the image URL to the parent component
-            this.imageUploaded.emit(event.body?.fileDownloadUri);
+            this.imageUploaded.emit(this.message);
           }
         },
         err => {

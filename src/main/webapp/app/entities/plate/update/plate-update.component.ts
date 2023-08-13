@@ -73,6 +73,6 @@ export class PlateUpdateComponent implements OnInit {
 
   protected onImageUploaded(url: string): void {
     // Set the image URL in the 'photo' form control
-    this.editForm.get('photo')?.setValue('hello its me');
+    this.editForm.get('photo')?.setValue(url);
   }
 }
