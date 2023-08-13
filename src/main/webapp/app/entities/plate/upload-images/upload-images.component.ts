@@ -14,7 +14,7 @@ export class UploadImagesComponent implements OnInit {
   currentFile: File | undefined = undefined;
   progress = 0;
   message = '';
-
+  fileUrl = '';
   fileInfos: Observable<any> | undefined;
 
   constructor(private uploadService: UploadFileService) {}
@@ -40,7 +40,7 @@ export class UploadImagesComponent implements OnInit {
             this.message = event.body?.message || 'Upload successful';
             this.fileInfos = this.uploadService.getFiles();
 
-            // Emit the image URL to the parent component
+            // Emit the file URL to the parent component
             this.imageUploaded.emit(this.message);
           }
         },
