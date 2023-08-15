@@ -87,8 +87,11 @@ public class FilesStorageServiceImpl implements FilesStorageService {
             Path filePath = this.root.resolve(filename);
 
             Files.copy(file.getInputStream(), filePath);
+            // Construct the URL using your desired format
+            String baseUrl = "http://localhost:8080/files/";
+            String url = baseUrl + filename;
 
-            return filePath.toUri().toString();
+            return url;
         } catch (Exception e) {
             throw new RuntimeException("Could not save file: " + e.getMessage());
         }
